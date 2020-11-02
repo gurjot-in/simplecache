@@ -86,6 +86,6 @@ Web server will be running at `http://127.0.0.1:8000/`
 ```bash
 ab -n 1000 -c 5  http://127.0.0.1:8000/cache/key
 ```
-![ScreenShot](/docs/ab_ss.png)
+![ScreenShot](/docs/perf_ss.png)
 
 
