@@ -36,8 +36,8 @@ Web server will be running at `http://127.0.0.1:8000/`
  HOST - http://127.0.0.1:8000
  
 ##### List all keys
-
-	  GET /cache
+    
+    GET /cache
     Status 200  OK
     
     Response JSON
