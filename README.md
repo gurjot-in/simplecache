@@ -80,6 +80,14 @@ Web server will be running at `http://127.0.0.1:8000/`
 
     DELETE /cache/<key>
     Status 204  No Content
+    
+## Unit Testing
+
+Just run the pytest command inside the main dir
+
+```bash
+pytest -v
+```
 
 ## Performance Testing
 [ApacheBench](https://httpd.apache.org/docs/2.4/programs/ab.html) 
