@@ -52,7 +52,7 @@ Web server will be running at `http://127.0.0.1:8000/`
     Response JSON
     "value"
 
-##### Insert new key
+##### Insert key
 
     POST /cache
     Status 201  Created
@@ -62,7 +62,19 @@ Web server will be running at `http://127.0.0.1:8000/`
     "key": "log",
     "value": "kafka"
 	 }
-  
+	 
+
+##### Insert self expiry key
+
+    POST /cache
+    Status 201  Created
+    
+    Request JSON
+    {
+    "key": "log",
+    "value": "kafka",
+    "ttl": 3
+	 }
 
 ##### Delete key
 
