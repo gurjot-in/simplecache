@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
-
+import pytest
 from fapi import app
 from httpx import AsyncClient
-
+import time
 client = TestClient(app)
 
 
@@ -11,13 +11,15 @@ def test_get_all_keys():
     response = client.get("/cache")
     assert response.status_code == 200
     assert response.json() == ["tomato"]
+    client.delete("/cache/tomato")
 
 
+@pytest.mark.asyncio
 def test_delete_key():
     client.post("/cache", json={"key": "apple", "value": "$13"})
     response = client.get("/cache/apple")
     assert response.status_code == 200
-    assert response.json() == "apple"
+    assert response.json() == "$13"
 
     client.delete("/cache/apple")
     response = client.get("/cache/apple")
@@ -26,11 +28,16 @@ def test_delete_key():
     assert response.json() is None
 
 
-def test_large_input():
-    for i in range(10000000):
-        client.post("/cache", json={"key": "k_{}".format(i), "value": "v_{}".format(i)})
-
-    response = client.get("/cache")
+@pytest.mark.asyncio
+def test_insert_with_expiry():
+    client.post("/cache", json={"key": "apple", "value": "$13", "ttl": 3})
+    response = client.get("/cache/apple")
     assert response.status_code == 200
-    assert len(response.json()) == 10000000
+    assert response.json() == '$13'
+
+    time.sleep(3)
+    response = client.get("/cache/apple")
+    print(response.json())
+    assert response.status_code == 200
+    assert response.json() is None
 
