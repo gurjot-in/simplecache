@@ -1,5 +1,6 @@
 
 
+
 # simplecache
 A simple, thread-safe in memory cache store written in Python.
 
@@ -67,5 +68,12 @@ Web server will be running at `http://127.0.0.1:8000/`
 
     DELETE /cache/<key>
     Status 204  No Content
+
+## Performance Testing
+[ApacheBench](https://httpd.apache.org/docs/2.4/programs/ab.html) 
+```bash
+ab -n 1000 -c 5  http://127.0.0.1:8000/cache/key
+```
+![ScreenShot](/docs/ab_ss.png)
 
 
