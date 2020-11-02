@@ -14,7 +14,6 @@ def test_get_all_keys():
     client.delete("/cache/tomato")
 
 
-@pytest.mark.asyncio
 def test_delete_key():
     client.post("/cache", json={"key": "apple", "value": "$13"})
     response = client.get("/cache/apple")
@@ -28,7 +27,6 @@ def test_delete_key():
     assert response.json() is None
 
 
-@pytest.mark.asyncio
 def test_insert_with_expiry():
     client.post("/cache", json={"key": "apple", "value": "$13", "ttl": 3})
     response = client.get("/cache/apple")
